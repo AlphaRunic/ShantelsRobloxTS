@@ -14,7 +14,7 @@ export class DataBase {
         return DataStore2(name, this.plr);
     }
 
-    public InitStore(name: string, defaultValue?: unknown): Store {
+    public InitStore(name: string, defaultValue?: unknown): void {
         const store = this.GetStore(name);
 
         if (defaultValue !== undefined) {
@@ -35,8 +35,6 @@ export class DataBase {
         }
 
         store.OnUpdate(updateClient);
-
-        return store;
     }
 
     public Get(name: string, defaultValue?: any): Promise<unknown> {
@@ -50,5 +48,9 @@ export class DataBase {
             store.Set(value)
             return value;
         });
+    }
+
+    public async Increment(name: string, value: number, defaultValue?: number): Promise<unknown> {
+        return this.Set(name, (await this.Get(name, defaultValue) as number) + value);
     }
 }

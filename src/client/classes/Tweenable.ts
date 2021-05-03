@@ -1,10 +1,4 @@
-import { TweenService } from "@rbxts/services";
-
-function twn(i: Instance, ti: TweenInfo, goal: object): Tween {
-    const tween: Tween = TweenService.Create(i, ti, goal);
-    tween.Play();
-    return tween;
-}
+import { Tween } from "./Tween";
 
 export class Tweenable {
     public constructor(
@@ -12,6 +6,6 @@ export class Tweenable {
     ) {}
 
     public Tween(tweenInfo: TweenInfo, goal: object): Tween {
-        return twn(this.instance, tweenInfo, goal);
+        return Tween(this.instance, tweenInfo, goal);
     }
 }
